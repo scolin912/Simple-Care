@@ -8,5 +8,5 @@
 6.	Open Terminal or CMD and test MQTT command line.
     
     example: mosquitto_pub -h 1.2.3.4(your AWS public IP) -d -t hello/add_data -m "\0xID_20170622\bed\123\789\1\my@gmail.com\"
-7.	You’ll receive localhost MQTT publish command line by putty.
+7.	You’ll receive localhost MQTT publish command by putty.
 8.	Congras! you have your own PHP server and work successfully from AWS!
