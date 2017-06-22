@@ -1,6 +1,7 @@
 1.	Please study this AWS tutorial to setup your LAMP server.
-    http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html
 
+
+    http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html
 2.	Go to phpmyadmin and add a new database call simple_care then import simple_care.sql for it.
 3.	Open putty and connect to AWS Linux, create a folder on the /var/www/html/(phpMQTT folder or something)
 4.	Put phpMQTT.php and subscribe.php to this folder.
