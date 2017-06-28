@@ -73,7 +73,7 @@ void connectWiFi(const String ssidString, const String passString)
         }
     }
 }
-
+ 
 void callback(char* topic, byte* payload, unsigned int length) {
   Serial.print("Message arrived [");
   Serial.print(topic);
