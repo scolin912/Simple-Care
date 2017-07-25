@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2017-06-22 06:59:01
--- 伺服器版本: 10.1.22-MariaDB
--- PHP 版本： 7.0.18
+-- 產生時間： 2017-07-25 05:18:27
+-- 伺服器版本: 10.1.25-MariaDB
+-- PHP 版本： 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `data_appuser` (
-  `UserLocation` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '使用者登入帳號',
-  `UserPassCode` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '使用者登入密碼',
+  `UserContry` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '使用者位置',
+  `UserPassword` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '使用者登入密碼',
   `UserName` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT '使用者名稱',
   `UserPhone` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT '使用者手機號碼',
   `UserEmail` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '使用者電子郵件信箱',
@@ -39,6 +39,13 @@ CREATE TABLE `data_appuser` (
   `WriterCreate` varchar(155) COLLATE utf8_unicode_ci NOT NULL COMMENT '資料建立用戶',
   `WriterEdit` varchar(155) COLLATE utf8_unicode_ci NOT NULL COMMENT '資料修改用戶'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='使用者帳號主檔資料表';
+
+--
+-- 資料表的匯出資料 `data_appuser`
+--
+
+INSERT INTO `data_appuser` (`UserContry`, `UserPassword`, `UserName`, `UserPhone`, `UserEmail`, `DatetimeCreate`, `DatetimeEdit`, `WriterCreate`, `WriterEdit`) VALUES
+('Taipei', '123', 'sco', '0958888888', 'sco@maker.taiwan', '2017-07-25 03:55:47', '2017-07-25 03:55:47', 'API', 'API');
 
 -- --------------------------------------------------------
 
@@ -68,8 +75,17 @@ CREATE TABLE `log_peripheralwithcentral` (
   `DatetimeCreate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '資料建立日期時間',
   `WriterCreate` varchar(155) COLLATE utf8_unicode_ci NOT NULL COMMENT '資料建立用戶',
   `RSSI` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '主機收到從機RSSI值',
-  `ID` int(11) NOT NULL COMMENT '資料表主鍵'
+  `ID` int(11) NOT NULL COMMENT '資料表主鍵',
+  `Distance` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='從機與主機接觸記錄資料表';
+
+--
+-- 資料表的匯出資料 `log_peripheralwithcentral`
+--
+
+INSERT INTO `log_peripheralwithcentral` (`PeripheralID`, `CentralID`, `DatetimeCreate`, `WriterCreate`, `RSSI`, `ID`, `Distance`) VALUES
+('11', '22', '2017-06-23 14:37:54', '', '33', 1, '44'),
+('55', '66', '2017-06-23 14:37:54', '', '77', 2, '88');
 
 --
 -- 已匯出資料表的索引
@@ -104,7 +120,7 @@ ALTER TABLE `log_peripheralwithcentral`
 -- 使用資料表 AUTO_INCREMENT `log_peripheralwithcentral`
 --
 ALTER TABLE `log_peripheralwithcentral`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '資料表主鍵';COMMIT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '資料表主鍵', AUTO_INCREMENT=3;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
