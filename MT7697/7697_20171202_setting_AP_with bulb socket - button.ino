@@ -23,17 +23,13 @@ int flag1=1,flag2=0,flag3=0,flag31=0,flag32=0,flag33=0,flag_lighting1=1,flag_lig
 const char* Topic = "hello/add_data";
 const char* SubTopic = "hello/world";
 
-const char* mqtt_server = "192.168.2.102"; //your cloud server IP, if using localhost, please check CMD ipconfig.
+const char* mqtt_server = "192.168.2.100"; //your cloud server IP, if using localhost, please check CMD ipconfig.
 
 int i=0;    
 
 int pinLed = 14;
 int PWM = 9; // PWM pin
-const int buttonPin = 2;     // the number of the pushbutton pin
-const int ledPin =  13;      // the number of the LED pin
 int dimming = 40;  // Dimming level (0-128)  0 = ON, 128 = OFF
-
-int buttonState = 0;         // variable for reading the pushbutton status
 
 
 int status = WL_IDLE_STATUS;
@@ -61,6 +57,8 @@ LBLECharacteristicString _lon("B882467F-77BC-4697-9A4A-4F3366BC6C38", LBLE_WRITE
 LBLECharacteristicString _lat("61DE21BC-6E02-4631-A0A7-1B6C7AF0DAE6", LBLE_WRITE);
 LBLECharacteristicString _usermail("B882467F-77BC-4697-9A4A-4F3366BC6C40", LBLE_WRITE);
 LBLECharacteristicString _TBD("61DE21BC-6E02-4631-A0A7-1B6C7AF0DAE8", LBLE_WRITE);
+
+
 
 void connectWiFi(const String ssidString, const String passString)
 {
@@ -187,8 +185,6 @@ void setup()
     Serial.begin(115200);
     analogWrite(pinLed, 0);
     analogWrite(PWM, 55);  //setting PWM speed
-    pinMode(buttonPin, INPUT);
-    pinMode(ledPin, OUTPUT);
     LBLE.begin();
     while (!LBLE.ready()) {
       delay(100); 
@@ -205,7 +201,7 @@ void setup()
     LBLEPeripheral.addService(_periphralService);
     LBLEPeripheral.begin();
     LBLEAdvertisementData _advertisement;
-    _advertisement.configAsConnectableDevice("Simple Care Button");
+    _advertisement.configAsConnectableDevice("Simple Care 2");
     LBLEPeripheral.advertise(_advertisement);
     Serial.println("BLE Ready!");
 
@@ -218,62 +214,46 @@ void loop()
 
   if (flag1==1)
 {
-      delay(1000);
-    if (_ssidRead.isWritten()) {
-        WiFi.disconnect();
-        _wasConnected = false;
-        _ssidString = _ssidRead.getValue();
-        _passString = "";
-        Serial.print("New SSID: ");
-        Serial.println(_ssidString);
-    }
-    if (_passRead.isWritten()) {
-        WiFi.disconnect();
-        _wasConnected = false;
-        _passString = _passRead.getValue();
-        Serial.print("New Password: ");
-        Serial.println(_passString);
-        connectWiFi(_ssidString, _passString);
 
-     if (_ssidString.length() &&
-        WiFi.status() != WL_CONNECTED) {
-        Serial.print("Connecting Status: ");
-        Serial.println(WiFi.status());
-        connectWiFi(_ssidString, _passString);
-    } else if (WiFi.status() == WL_CONNECTED &&
-               !_wasConnected) {
-        _wasConnected = true;
-        Serial.print("Connected to: ");
-        Serial.println(_ssidString);
-    }
+      delay(1000);
+
+    
+        WiFi.disconnect();
+
+        connectWiFi("simple care ap", "simplecare4u");
+
+        _wasConnected = false;
+        
+
+
     flag1 = 0;
     flag2 = 1;
         
-    }
+    
 
 }
    if (flag2==1)
 {
 
-        _lonString = _lon.getValue();
-        Serial.println(_lonString);
+if (WiFi.status() == WL_CONNECTED &&
+               !_wasConnected)
 
-        _latString = _lat.getValue();
-        Serial.println(_latString);
+               {
+                _wasConnected = true;
+            Serial.print("Connected to: ");
+        Serial.println("simple care ap");
+                
+                
+                }
+               
+         
 
-        _usermailString = _usermail.getValue();
-        Serial.println(_latString);
-
-        _positionString = _position.getValue();
-        Serial.println(_positionString);
-
-        
+ 
 
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
 
   Serial.println("BLE ready, start scan (wait 2 seconds)");
-  LBLECentral.scan();
 
   delay(1000);
 
@@ -286,31 +266,91 @@ void loop()
    if (flag3==1)
 {
   digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+
+   if (WiFi.status() != WL_CONNECTED) 
+        {
+          
+          WiFi.disconnect();
+
+        connectWiFi("simple care ap", "simplecare4u");
+          
+          
+          }
   
-Topic = "hello/world";
-SubTopic = "hello/you";
+Topic = "hello/update_BLE_data";
+SubTopic = "hello/world";
 
     if (!client.connected()) {
     reconnect();
   }
   client.loop();
-delay(1000);
 
-buttonState = digitalRead(buttonPin);
-if (buttonState == HIGH) {
-    // turn LED on:
-     client.publish(Topic, "l");
-     Serial.println("publish");
-     digitalWrite(ledPin, HIGH);
-   // digitalWrite(pinLed, HIGH);
-  } else {
-    // turn LED off:
-   // digitalWrite(pinLed, LOW);
-   Serial.println("low");
-   digitalWrite(ledPin, LOW);
+LBLECentral.stopScan();
+  LBLECentral.scan();
+
+  
+delay(1000);
+  Serial.print("Total ");
+  Serial.print(LBLECentral.getPeripheralCount());
+  Serial.println(" devices found:"); 
+
+    for (int i = 0; i < LBLECentral.getPeripheralCount(); i++) {
+    char  buf1 [100]={'\0'};
+    char  buf2 [100]={'\0'};
+    char  buf3 [100]={'\0'};
+
+  sprintf (buf1, "%s", LBLECentral.getAddress(i).c_str()); 
+  sprintf (buf2, "%03i", LBLECentral.getRSSI(i));
+  double a = calculateAccuracy( -60, LBLECentral.getRSSI(i) ); //理論上1米的RSSI大約為55
+  //實測s1是-61，s2是-53，s3是-61  //每個都要設定自己的rssi
+  //s1 -70 s2 -75 s3 -54
+  //s1 -70 s2 -65 s3 -54
+   //s1 -60 s2 -60 s3 -60
+  
+  sprintf(str1, "%f", a);
+
+  
+  strcat(buf3,"\\");
+  strcat(buf3,str);
+  strcat(buf3,"\\");
+  strcat(buf1,"\\");
+  strcat(buf1,buf2);
+  strcat(buf3,buf1);
+  strcat(buf3,"\\");
+  strcat(buf3,str1);
+ // strcat(buf3,"\\");
+  
+  Serial.print(buf3);
+  client.publish(Topic, buf3);
+  Serial.println();
+
+if (flag31 == 1)
+{
+  Serial.println("3131");
+  analogWrite(pinLed, 55);
+
+
+  
   }
 
- digitalWrite(LED_BUILTIN, LOW);
+  if (flag32 == 1)
+  {
+    Serial.println("3232");
+    analogWrite(pinLed, 0);
+
+
+
+  
+    }
+
+
+  
+  flag3 = 1;
+  digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
+  }
+
+  
+
 }
     
 }
