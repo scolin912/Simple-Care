@@ -41,7 +41,7 @@ String str2;
 
 String EEPROM_read(int _page = 0, int _length = 50) // 讀取資料，1頁 50 bytes
 {
-  int _address = _page * 32;
+  int _address = _page * 52;
   char _str;
   String read_buffer = "";
 
@@ -59,7 +59,7 @@ String EEPROM_read(int _page = 0, int _length = 50) // 讀取資料，1頁 50 by
 
 bool EEPROM_write(char* _str, int _page, int _length) // 寫入資料，1頁 50 bytes
 {
-  int _address = _page * 32;
+  int _address = _page * 52;
   if (_length > 51) {                // 超出頁面
     Serial.println("Out Of Pages");
     return false;
