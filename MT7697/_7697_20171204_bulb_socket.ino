@@ -9,7 +9,7 @@
 #include <LBLEPeriphral.h>
 #include <LBLECentral.h>
 #include <PubSubClient.h>
-//#include <LWatchDog.h>
+#include <LWatchDog.h>
 #include <WiFiClient.h>
 #include <EEPROM.h>
 #include <hal_wdt.h>
@@ -354,6 +354,7 @@ Serial.print("Configuring access point...");
    
 if (flag2==1)
 {
+  LWatchDog.begin(25); //增加watch dog，如果系統當機就從這裡開始
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
 
@@ -371,7 +372,7 @@ if (flag2==1)
   
    if (flag3==1)
 {
-
+  LWatchDog.feed();//watchdog feed的進入點
 //printWifiData();
   
   digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
