@@ -266,6 +266,8 @@ String myString = String(array[0]);
     flag0 = 0;
     flag1 = 0;
     flag2 = 1;
+   
+   LWatchDog.begin(25); //增加watch dog，如果系統當機就從這裡開始
   }
 else
 {
@@ -354,7 +356,7 @@ Serial.print("Configuring access point...");
    
 if (flag2==1)
 {
-  LWatchDog.begin(25); //增加watch dog，如果系統當機就從這裡開始
+  
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
 
