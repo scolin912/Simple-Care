@@ -1,0 +1,51 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/menu_refresh"
+          android:checkable="false"
+          android:orderInCategory="1"
+          android:showAsAction="ifRoom"/>
+    <item android:id="@+id/menu_scan"
+          android:title="@string/menu_scan"
+          android:orderInCategory="100"
+          android:showAsAction="ifRoom|withText"/>
+    <item android:id="@+id/menu_stop"
+          android:title="@string/menu_stop"
+          android:orderInCategory="101"
+          android:showAsAction="ifRoom|withText"/>
+    
+<!-- Search Widget -->
+<item android:id="@+id/action_search"
+      android:icon="@android:drawable/ic_menu_search"
+      android:title="Search"
+      android:showAsAction="always"
+      android:actionViewClass="android.widget.SearchView"/>
+
+
+ <item
+        android:id="@+id/action_language"
+        android:showAsAction="always"
+        android:title="@string/language"/>
+ 
+
+ <item
+        android:id="@+id/action_best"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/best"/>
+
+    
+ <item
+        android:id="@+id/action_liked"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/liked"/>
+ 
+ <item
+        android:id="@+id/action_rate"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/ratetohelpus"/>
+ 
+ 
+    
+</menu>

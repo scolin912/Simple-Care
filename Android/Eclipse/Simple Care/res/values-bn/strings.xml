@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AAPBD স্লাইডার মেনু</string>
+    <string name="action_settings">সেটিংস</string>
+    <string name="hello_world">ওহে বিশ্ব!</string>
+    <string name="drawer_open">স্লাইডার মেনু খোলা</string>
+    <string name="drawer_close">স্লাইডার মেনু বন্ধ</string>
+    
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item >বাড়ি</item>
+        <item >মানুষ খুঁজুন</item>
+        <item >ছবি</item>
+        <item >সম্প্রদায়গুলি</item>
+        <item >পেজ</item>
+        <item> নতুন কি</item>
+    </string-array>
+    
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in, change icon for bangla if you want-->
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_people</item>
+        <item>@drawable/ic_photos</item>
+        <item>@drawable/ic_communities</item>
+        <item>@drawable/ic_pages</item>
+        <item>@drawable/ic_whats_hot</item>
+    </array>
+    
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">আইটেম আইকন</string>
+    
+       <string name="language">ইংলিশ</string>
+                <string name="best">সেরা</string>
+                                <string name="liked">পছন্দ</string>
+                
+                        <string name="ratetohelpus">আমাদের সাহায্য করার জন্য মতামত দিতে</string>
+     
+
+</resources>

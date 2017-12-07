@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:gravity="center" >
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="22dp"
+        android:paddingLeft="26dp"
+        android:paddingRight="26dp"
+        android:paddingTop="22dp" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="257dp"
+            android:layout_height="wrap_content"
+            android:text="Select 2.4GHz WiFi and input password" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Spinner
+                android:id="@+id/my_spinner1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:drawableBottom="@android:color/black"
+                android:ems="10"
+                android:hint="password"
+                android:inputType="none"
+                android:password="true" />
+
+            <EditText
+                android:id="@+id/editText0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:drawableBottom="@android:color/black"
+                android:ems="10"
+                android:hint="position"
+                android:inputType="none"
+                android:password="false" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/editText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:drawableBottom="@android:color/black"
+                    android:ems="10"
+                    android:inputType="none"
+                    android:password="false"
+                    android:text="latitude" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/editText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:drawableBottom="@android:color/black"
+                android:ems="10"
+                android:inputType="none"
+                android:password="false"
+                android:text="longitude" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/setposition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="setposition" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/set"
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        android:text="set" />
+
+</LinearLayout>
