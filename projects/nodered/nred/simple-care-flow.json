@@ -1,0 +1,1 @@
+[{"id":"1e8a7fbf.49d6e","type":"inject","z":"5be4414a.8f994","name":"ROOM3_L7697G","topic":"hello","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"x":580,"y":540,"wires":[["ef650f6f.77e99"]]}]

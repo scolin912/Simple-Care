@@ -1,0 +1,8 @@
+version: '2'
+services:
+  mqttsrv:
+    image: eclipse-mosquitto:1.4.12
+  nodered:
+    build: nred
+    ports:
+      - "9880:1880"
