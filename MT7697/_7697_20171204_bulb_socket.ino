@@ -164,7 +164,7 @@ void reconnect() {
     if (client.connect(clientId.c_str())) {
       Serial.println("connected");
       // Once connected, publish an announcement...
-      client.publish(Topic, "hello world");
+      //client.publish(Topic, "hello world");
       // ... and resubscribe
       client.subscribe(SubTopic);
     } else {
